@@ -27,5 +27,5 @@ server_addr: ${NGROK_SERVER}:${NGROK_SERVER_PORT:-4443}
 trust_host_root_certs: false
 EOF
 
-echo -e "\nStarting  ngrok -log stdout --config ${CONFIG_FILE} -subdomain ${SUBDOMAIN} $@"
-ngrok -log stdout --config ${CONFIG_FILE} -subdomain ${SUBDOMAIN} $@
+echo -e "\nStarting  ngrok -log stdout -log-level INFO --config ${CONFIG_FILE} -subdomain ${SUBDOMAIN} $@ ${LOCAL_ADDR}"
+ngrok -log stdout -log-level INFO --config ${CONFIG_FILE} -subdomain ${SUBDOMAIN} $@ ${LOCAL_ADDR}

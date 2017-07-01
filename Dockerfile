@@ -14,5 +14,5 @@ ENTRYPOINT ["./entrypoint.sh"]
 COPY ngrok ./ngrok
 COPY README.md client.sh server.sh entrypoint.sh build.sh ./
 
-RUN chmod +x *.sh && ./build.sh
+RUN chmod +x *.sh && DOCKER_BUILD=true ./build.sh
 

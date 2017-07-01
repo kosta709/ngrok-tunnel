@@ -19,8 +19,7 @@ docker build --build-arg NGROK_SERVER_DOMAIN=tunnel.my.domain -t codefresh/cf-tu
 ### Run server
 For all ngrokd parameters see help in `docker run -it codefresh/cf-tunnel:my.domain ngrokd -h`
 
-
-Server certificates, key and ca are in certs/{server.crt,server.key}
+Server certificates are generated in /certs/{server.crt,server.key} and signed by ca.pem + ca.key
 
 the command below will start `ngrokd -domain $NGROK_SERVER_DOMAIN -tlsCrt certs/server.crt -tlsKey certs/server.key $@`
 ```

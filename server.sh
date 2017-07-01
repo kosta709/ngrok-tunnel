@@ -20,12 +20,12 @@ else
     fi
 
     SERVER_CSR=${CERTS_DIR}/server.csr
-    CERT_SUBJ=$(openssl x509 -noout -subject -in certs/ca.pem | cut -d' ' -f 2)
+    CERT_SUBJ=$(openssl x509 -noout -subject -in ${CA_PEM} | cut -d' ' -f 2)
 
     openssl genrsa -out ${SERVER_KEY} 2048
     openssl req -new -key ${SERVER_KEY} -subj "${CERT_SUBJ}" -out ${SERVER_CSR}
     openssl x509 -req -in ${SERVER_CSR} -CA ${CA_PEM} -CAkey ${CA_KEY} -CAcreateserial -days 10000 -out ${SERVER_CRT}
 fi
 
-echo -e "\nStarting ngrokd -domain ${NGROK_SERVER_DOMAIN} -tlsCrt certs/server.crt -tlsKey certs/server.key $@ "
-ngrokd -domain ${NGROK_SERVER_DOMAIN} -tlsCrt ${SERVER_CERT} -tlsKey ${SERVER_KEY} $@
+echo -e "\nStarting ngrokd -domain ${NGROK_SERVER_DOMAIN} -tlsCrt ${SERVER_CRT} -tlsKey ${SERVER_KEY} -log-level INFO $@ "
+ngrokd -domain ${NGROK_SERVER_DOMAIN} -tlsCrt ${SERVER_CRT} -tlsKey ${SERVER_KEY} -log-level INFO $@

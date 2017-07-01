@@ -28,6 +28,11 @@ make -C ${NGROK_DIR} release-server release-client
 
 cp -v ${NGROK_DIR}/bin/{ngrok,ngrokd} /usr/local/bin/
 
+if [[ -n ${DOCKER_BUILD} ]]; then
+   echo "Removing ngrok make stage - to decrease docker image size"
+   rm -rf ${NGROK_DIR}
+fi
+
 ###### Writing client ngrok.conf
 CONFIG_FILE=${DIR}/ngrok.conf
 
